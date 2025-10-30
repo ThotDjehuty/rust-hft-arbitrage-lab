@@ -1,0 +1,13 @@
+{
+  "exchange": "kraken",
+  "symbols": [
+    {
+      "pair": "BTCUSD",
+      "price": 67950.0
+    },
+    {
+      "pair": "ETHUSD",
+      "price": 3698.0
+    }
+  ]
+}

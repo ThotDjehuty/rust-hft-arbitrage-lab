@@ -1,0 +1,1 @@
+use rust_core::orderbook::OrderBook; #[test] fn test_apply_delta(){ let ob=OrderBook::new(); let ob2=ob.apply_delta(&[(100.0,1.0)], &[(101.0,2.0)], 1); assert_eq!(ob2.bids.len(),1); assert_eq!(ob2.asks.len(),1);}

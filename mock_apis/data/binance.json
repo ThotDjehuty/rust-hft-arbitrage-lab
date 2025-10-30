@@ -1,0 +1,13 @@
+{
+  "exchange": "binance",
+  "symbols": [
+    {
+      "pair": "BTCUSDT",
+      "price": 68000.5
+    },
+    {
+      "pair": "ETHUSDT",
+      "price": 3700.2
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+requests
+websocket-client
+fastapi
+uvicorn
+statsmodels
+tick
+jupyter
+pytest

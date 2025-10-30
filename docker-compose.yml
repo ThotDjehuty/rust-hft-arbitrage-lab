@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  mock_apis:
+    build: ./mock_apis
+    container_name: mock_apis
+    ports: [ "8000:8000" ]
+    volumes: [ "./mock_apis/data:/data:ro" ]
+  lab:
+    build: .
+    container_name: rust-hft-arbitrage-lab
+    ports: [ "8888:8888" ]
+    volumes: [ ".:/app" ]
+    environment: [ "PYTHONPATH=/app" ]
+    depends_on: [ mock_apis ]
