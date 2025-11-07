@@ -1,0 +1,12 @@
+/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/deps/serde-a1193bab6368960d.d: /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/build/serde-dde32d449e95ae0f/out/private.rs
+
+/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/deps/libserde-a1193bab6368960d.rmeta: /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/build/serde-dde32d449e95ae0f/out/private.rs
+
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/build/serde-dde32d449e95ae0f/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/rust_python_bindings/target/debug/build/serde-dde32d449e95ae0f/out

@@ -1,0 +1,17 @@
+[package]
+name = "signature_optimal_stopping"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "signature_optimal_stopping"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+ndarray = "0.15"
+# optional: remove ndarray-linalg if you don't have BLAS installed
+ndarray-linalg = { version = "0.16", features = ["openblas-static"] }
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"

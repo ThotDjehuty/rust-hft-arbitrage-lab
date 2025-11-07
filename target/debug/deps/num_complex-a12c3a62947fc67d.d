@@ -1,0 +1,9 @@
+/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/target/debug/deps/num_complex-a12c3a62947fc67d.d: /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/crand.rs
+
+/Users/melvinalvarez/Documents/Workspace/rust-hft-arbitrage-lab-enriched/target/debug/deps/libnum_complex-a12c3a62947fc67d.rmeta: /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs /Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/crand.rs
+
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs:
+/Users/melvinalvarez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/crand.rs:

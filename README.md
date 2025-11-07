@@ -1,31 +1,27 @@
-
 # rust-hft-arbitrage-lab
 
-Unified repository with **dual Docker setup** (toggle `tick` on/off), mock exchanges (FastAPI REST+WS), Rust core with Python bindings, example notebooks, and GitHub Actions.
+## 📌 Objectif
+Laboratoire d’arbitrage haute fréquence combinant Rust (moteur) et Python (stratégies).
 
-## Quickstart (macOS 14 Intel i9)
-- **Stable (no C++ builds)**:
-  ```bash
-  ./dev.sh up
-  # or: make up
-  ```
-- **With `tick` (compiles C++ ext)**:
-  ```bash
-  TICK=1 ./dev.sh up
-  # or: make TICK=1 up
-  ```
+## 🧩 Composants
+- `rust_core/` : moteur d’arbitrage, matching engine en Rust
+- `rust_python_bindings/` : bindings PyO3 exposés à Python via `maturin`
+- `examples/notebooks/` : stratégies en Python avec backtesting et visualisation
+- `docker/` : environnement reproductible avec Docker Compose
+- `.github/workflows/` : CI/CD pour build/test/package
 
-Jupyter → http://localhost:8888  
-Mock API → http://localhost:8000/health
+## 🚀 Lancer le projet
+```bash
+docker-compose up --build
+```
 
-## Structure
-- `Dockerfile.no-tick` • Python 3.11, no C++ compiles
-- `Dockerfile.tick`    • Python 3.10 multi-stage, builds wheel for `tick==0.6.0.0`
-- `docker-compose.yml` + overrides `docker-compose.no-tick.yml` / `docker-compose.tick.yml`
-- `mock_apis/` • FastAPI server + WS streaming, with mock data
-- `rust_core/` • Rust library stubs (orderbook, matching engine, strategies)
-- `rust_python_bindings/` • PyO3 module `hft_py`
-- `python_client/` • backtesting/execution scaffolding
-- `examples/notebooks/` • executable notebooks (imbalance MM, pairs, triangular, hawkes, price discovery, hedging, signature OS)
-- `.github/workflows/` • CI + Release
+## 🧪 Stratégies incluses
+- 📈 Triangular Arbitrage
+- 🪙 Market Making
 
+## 📚 Références scientifiques
+- Marcos López de Prado – *Advances in Financial ML*
+- Rama Cont – *Financial Modelling*
+- Jim Gatheral – *The Volatility Surface*
+- Bacry et al. – *Hawkes Processes in Finance*
+- Cartea & Jaimungal – *Algorithmic and High-Frequency Trading*

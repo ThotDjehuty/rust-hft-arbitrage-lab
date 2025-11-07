@@ -1,7 +1,21 @@
-TICK ?= 0
-COMPOSE = docker-compose.yml
-OVERRIDE = $(if $(filter $(TICK),1),docker-compose.tick.yml,docker-compose.no-tick.yml)
-.PHONY: up build down
-up:    ; docker compose -f $(COMPOSE) -f $(OVERRIDE) up --build
-build: ; docker compose -f $(COMPOSE) -f $(OVERRIDE) build --no-cache
-down:  ; docker compose -f $(COMPOSE) -f $(OVERRIDE) down -v
+.PHONY: build test package clean
+
+build:
+    cargo build -p rust_python_bindings --release
+    cargo build -p aggregator --release
+    cargo build -p connector_binance --release || true
+    cargo build -p connector_kraken --release || true
+    cargo build -p connector_coinbase --release || true
+    cargo build -p connector_coingecko --release || true
+
+test:
+    cargo test --all
+
+package: build test
+    @rm -f rust-hft-arbitrage-lab-mods.zip
+    zip -r rust-hft-arbitrage-lab-mods.zip . -x "target/*" -x ".git/*" -x "venv/*" -x "__pycache__/*"
+    @echo "Created rust-hft-arbitrage-lab-mods.zip in repo root"
+
+clean:
+    cargo clean
+    @rm -f rust-hft-arbitrage-lab-mods.zip

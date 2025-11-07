@@ -1,0 +1,12 @@
+[workspace]
+members = [
+  "rust_core/connectors/common",
+  "rust_core/connectors/binance",
+  "rust_core/connectors/kraken",
+  "rust_core/connectors/coinbase",
+  "rust_core/connectors/coingecko",
+  "rust_core/aggregator",
+  "rust_core/signature_optimal_stopping",
+  "rust_core/signature_optimal_stopping_py",
+  "rust_python_bindings"
+]
