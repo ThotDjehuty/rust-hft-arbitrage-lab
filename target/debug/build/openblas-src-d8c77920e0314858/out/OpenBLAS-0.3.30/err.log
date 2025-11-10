@@ -1,0 +1,586 @@
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+gemv.c:104:7: warning: unused variable 'ncpu' [-Wunused-variable]
+  104 |   int ncpu = num_cpu_avail(3);
+      |       ^~~~
+1 warning generated.
+gemv.c:104:7: warning: unused variable 'ncpu' [-Wunused-variable]
+  104 |   int ncpu = num_cpu_avail(3);
+      |       ^~~~
+1 warning generated.
+gemv.c:104:7: warning: unused variable 'ncpu' [-Wunused-variable]
+  104 |   int ncpu = num_cpu_avail(3);
+      |       ^~~~
+1 warning generated.
+gemv.c:104:7: warning: unused variable 'ncpu' [-Wunused-variable]
+  104 |   int ncpu = num_cpu_avail(3);
+      |       ^~~~
+1 warning generated.
+nrm2.c:62:12: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+   62 |     return fabsf(x[0]);
+      |            ^
+nrm2.c:62:12: note: use function 'fabsl' instead
+   62 |     return fabsf(x[0]);
+      |            ^~~~~
+      |            fabsl
+nrm2.c:71:26: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+   71 |   return (sqrt((float)n)*fabsf(x[0]));
+      |                          ^
+nrm2.c:71:26: note: use function 'fabsl' instead
+   71 |   return (sqrt((float)n)*fabsf(x[0]));
+      |                          ^~~~~
+      |                          fabsl
+2 warnings generated.
+max.c:142:26: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  142 |   if (incx == 0) return (ABS(*x));
+      |                          ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:142:26: note: use function 'fabsl' instead
+  142 |   if (incx == 0) return (ABS(*x));
+      |                          ^~~
+      |                          fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+1 warning generated.
+max.c:142:26: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  142 |   if (incx == 0) return (ABS(*x));
+      |                          ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:142:26: note: use function 'fabsl' instead
+  142 |   if (incx == 0) return (ABS(*x));
+      |                          ^~~
+      |                          fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+1 warning generated.
+rotmg.c:102:6: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  102 |                 if(ABS(dq1) > ABS(dq2))
+      |                    ^
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:102:6: note: use function 'fabsl' instead
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(gemv.c:x)
+      |                ^
+104:7: warning: unused variable 'ncpu' [-Wunused-variable]
+  104 |   int ncpurotmg.c:102:17: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  102 |                 if(ABS(dq1) > ABS(dq2))
+      |                               ^
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #d = num_cpu_aefine ABSvail(3);
+      |       ^~~~
+(x) fabsf(x)
+      |                ^
+rotmg.c:102:17: note: use function 'fabsl' instead
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:157:10: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  157 |                 while (ABS(*dd1) > GAMSQ) {
+      |                        ^
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:157:10: note: use function 'fabsl' instead
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:165:10: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  165 |                 while (ABS(*dd2) <= RGAMSQ && *dd2 != ZERO) {
+      |                        ^
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:165:10: note: use function 'fabsl' instead
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:171:10: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  171 |                 while (ABS(*dd2) > GAMSQ) {
+      |                        ^
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+rotmg.c:171:10: note: use function 'fabsl' instead
+rotmg.c:50:16: note: expanded from macro 'ABS'
+   50 | #define ABS(x) fabsf(x)
+      |                ^
+5 warnings generated.
+1 warning generated.
+nrm2.c:86:12: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   86 |   float fr=fabs(x[0]);
+      |            ^
+nrm2.c:86:12: note: use function 'fabsl' instead
+   86 |   float fr=fabs(x[0]);
+      |            ^~~~
+      |            fabsl
+nrm2.c:87:12: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   87 |   float fi=fabs(x[1]);
+      |            ^
+nrm2.c:87:12: note: use function 'fabsl' instead
+   87 |   float fi=fabs(x[1]);
+      |            ^~~~
+      |            fabsl
+max.c:144:26:2 warnings generated.
+ warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                          ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:26: note: use function 'fabsl' instead
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                          ^~~
+      |                          fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:36: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                                    ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:36: note: use function 'fabsl' instead
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                                    ^~~
+      |                                    fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+2 warnings generated.
+max.c:144:26: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                          ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:26: note: use function 'fabsl' instead
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                          ^~~
+      |                          fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:36: warning: absolute value function 'fabsf' given an argument of type 'long double' but has parameter of type 'float' which may cause truncation of value [-Wabsolute-value]
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                                    ^
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+max.c:144:36: note: use function 'fabsl' instead
+  144 |   if (incx == 0) return (ABS(*x) + ABS(*(x+1)));
+      |                                    ^~~
+      |                                    fabsl
+max.c:52:13: note: expanded from macro 'ABS'
+   52 | #define ABS fabsf
+      |             ^
+2 warnings generated.
+ar: creating archive ../libopenblas_haswellp-r0.3.30.a
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+ztbsv_U.c:91:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_U.c:91:9: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_U.c:91:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_U.c:91:21: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztbsv_L.c:89:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_L.c:89:9: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_L.c:89:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_L.c:89:21: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztbsv_L.c:89:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_L.c:89:9: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_L.c:89:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_L.c:89:21: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztbsv_U.c:91:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_U.c:91:9: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_U.c:91:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_U.c:91:21: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+ztbsv_U.c:91:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_U.c:91:9: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_U.c:91:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_U.c:91:21: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+ztbsv_L.c:89:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_L.c:89:9: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_L.c:89:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_L.c:89:21: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztbsv_L.c:89:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_L.c:89:9: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_L.c:89:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_L.c:89:21: note: use function 'fabsl' instead
+   89 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+2 warnings generated.
+ztbsv_U.c:91:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztbsv_U.c:91:9: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztbsv_U.c:91:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztbsv_U.c:91:21: note: use function 'fabsl' instead
+   91 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+2 warnings generated.
+ztpsv_U.c:80:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztpsv_U.c:80:9: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztpsv_U.c:80:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztpsv_U.c:80:21: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+ztpsv_L.c:85:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztpsv_L.c:85:11: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztpsv_L.c:85:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztpsv_L.c:85:23: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+ztpsv_L.c:85:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztpsv_L.c:85:11: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztpsv_L.c:85:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztpsv_L.c:85:23: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+2 warnings generated.
+ztpsv_U.c:80:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztpsv_U.c:80:9: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztpsv_U.c:80:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztpsv_U.c:80:21: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztpsv_U.c:80:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztpsv_U.c:80:9: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztpsv_U.c:80:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztpsv_U.c:80:21: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+ztpsv_L.c:85:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztpsv_L.c:85:11: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztpsv_L.c:85:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztpsv_L.c:85:23: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+ztpsv_L.c:85:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztpsv_L.c:85:11: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztpsv_L.c:85:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztpsv_L.c:85:23: note: use function 'fabsl' instead
+   85 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+ztpsv_U.c:80:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^
+ztpsv_U.c:80:9: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |         ^~~~
+      |         fabsl
+ztpsv_U.c:80:21: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^
+ztpsv_U.c:80:21: note: use function 'fabsl' instead
+   80 |     if (fabs(ar) >= fabs(ai)){
+      |                     ^~~~
+      |                     fabsl
+2 warnings generated.
+2 warnings generated.
+ztrsv_U.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_U.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_U.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_U.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+ztrsv_L.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_L.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_L.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_L.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+ztrsv_L.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_L.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_L.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_L.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+ztrsv_U.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_U.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_U.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_U.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+ztrsv_L.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_L.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_L.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_L.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+ztrsv_U.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_U.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_U.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_U.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+2 warnings generated.
+2 warnings generated.
+ztrsv_L.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_L.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_L.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_L.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+ztrsv_U.c:104:11: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^
+ztrsv_U.c:104:11: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |           ^~~~
+      |           fabsl
+ztrsv_U.c:104:23: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^
+ztrsv_U.c:104:23: note: use function 'fabsl' instead
+  104 |       if (fabs(ar) >= fabs(ai)){
+      |                       ^~~~
+      |                       fabsl
+2 warnings generated.
+2 warnings generated.
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+blas_server.c:421:22: warning: comparison between pointer and integer ('blas_queue_t *' (aka 'struct blas_queue *') and 'int') [-Wpointer-integer-compare]
+  421 |         while(!tscq || tscq == 0x1) {
+      |                        ~~~~ ^  ~~~
+parameter.c:273:7: warning: unused variable 'size' [-Wunused-variable]
+  273 |   int size = 16;
+      |       ^~~~
+abs.c:55:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   55 |  real = fabs(real);
+      |         ^
+abs.c:55:9: note: use function 'fabsl' instead
+   55 |  real = fabs(real);
+      |         ^~~~
+      |         fabsl
+abs.c:56:9: warning: absolute value function 'fabs' given an argument of type 'long double' but has parameter of type 'double' which may cause truncation of value [-Wabsolute-value]
+   56 |  imag = fabs(imag);
+      |         ^
+abs.c:56:9: note: use function 'fabsl' instead
+   56 |  imag = fabs(imag);
+      |         ^~~~
+      |         fabsl
+1 warning generated.
+2 warnings generated.
+1 warning generated.
+No receipt for 'com.apple.pkg.Xcode' found at '/'.
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+../kernel/x86_64/../generic/trsm_kernel_LT.c:182:18: warning: variable 'jj' set but not used [-Wunused-but-set-variable]
+  182 |   BLASLONG i, j, jj;
+      |                  ^
+../kernel/x86_64/dtrsm_kernel_RN_haswell.c:541:18: warning: variable 'jj' set but not used [-Wunused-but-set-variable]
+  541 |   BLASLONG i, j, jj;
+      |                  ^
+1 warning generated.
+1 warning generated.

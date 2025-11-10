@@ -9,3 +9,12 @@ fastapi
 uvicorn
 jupyter
 pytest
+streamlit
+plotly
+numpy
+nbformat
+maturin
+pyo3
+tokio
+tokio-tungstenite
+tungstenite

@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "rust_core/connectors/common",
+  "rust_connector",
   "rust_core/connectors/binance",
   "rust_core/connectors/kraken",
   "rust_core/connectors/coinbase",
