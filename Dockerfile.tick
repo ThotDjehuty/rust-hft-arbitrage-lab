@@ -1,5 +1,5 @@
 # ---------- Stage 1: build wheels (including tick) ----------
-FROM python:3.10-slim AS wheels
+FROM python:3.11-slim AS wheels
 WORKDIR /build
 RUN apt-get update && apt-get install -y --no-install-recommends     build-essential gfortran swig     libopenblas-dev liblapack-dev     pkg-config git curl     && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir "numpy==1.24.4" "scipy==1.10.1" "cython==0.29.36" "wheel" "setuptools<75"

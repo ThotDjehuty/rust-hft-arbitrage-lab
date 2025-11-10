@@ -1,3 +1,5 @@
+# Python runtime and data science dependencies used by the app.
+# NOTE: do NOT include Rust crates (pyo3, etc.) here -- those are built via cargo/maturin.
 pandas==2.1.4
 matplotlib==3.8.4
 seaborn==0.13.2
@@ -9,12 +11,11 @@ fastapi
 uvicorn
 jupyter
 pytest
-streamlit
-plotly
-numpy
-nbformat
-maturin
-pyo3
-tokio
-tokio-tungstenite
-tungstenite
+streamlit==1.51.0
+plotly==6.4.0
+# Use a numpy version compatible with pandas 2.x (pandas 2.1.4 requires numpy < 2)
+# Choose a numpy build that exists in manylinux index during the build
+numpy==1.26.4
+nbformat==5.10.4
+# maturin is a Python tool used to build/install Rust-based Python extensions
+maturin==1.10.0
