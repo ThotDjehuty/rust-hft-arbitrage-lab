@@ -16,33 +16,92 @@ except Exception as e:
     logger.warning("rust_connector not available: %s", e)
 
 def list_connectors() -> List[str]:
+    """List all available connectors including authenticated and third-party."""
+    base_connectors = ["binance", "coinbase", "uniswap", "mock"]
+    
     if RUST_AVAILABLE and hasattr(rust_connector, "list_connectors"):
         try:
-            return rust_connector.list_connectors()
+            base_connectors = rust_connector.list_connectors()
         except Exception:
             logger.exception("rust list_connectors failed")
-    return ["binance", "coinbase", "uniswap", "mock"]
+    
+    # Add authenticated and external connectors
+    return base_connectors + ["binance_auth", "coinbase_auth", "finnhub"]
 
-def get_connector(name: str):
+from typing import Optional
+
+
+def get_connector(name: str, api_key: Optional[str] = None, api_secret: Optional[str] = None, 
+                 passphrase: Optional[str] = None):
+    """Return a connector instance. If credentials are provided, attempt to set them on the
+    returned connector object (works for Python fallback and, where available, Rust connector
+    implementations exposing a credentials setter).
+    
+    Special connectors:
+    - binance_auth, coinbase_auth: Use authenticated Python wrappers
+    - finnhub: Use Finnhub Python connector
+    """
+    # Handle authenticated Python wrappers
+    if name == "binance_auth":
+        from python.connectors.authenticated import AuthenticatedBinance
+        if not api_key or not api_secret:
+            raise ValueError("binance_auth requires api_key and api_secret")
+        return AuthenticatedBinance(api_key, api_secret)
+    
+    if name == "coinbase_auth":
+        from python.connectors.authenticated import AuthenticatedCoinbase
+        if not api_key or not api_secret or not passphrase:
+            raise ValueError("coinbase_auth requires api_key, api_secret, and passphrase")
+        return AuthenticatedCoinbase(api_key, api_secret, passphrase)
+    
+    if name == "finnhub":
+        from python.connectors.finnhub import FinnhubConnector
+        if not api_key:
+            raise ValueError("finnhub requires api_key")
+        return FinnhubConnector(api_key)
+    
+    # Standard Rust connectors
     if RUST_AVAILABLE and hasattr(rust_connector, "get_connector"):
         try:
-            return rust_connector.get_connector(name)
+            conn = rust_connector.get_connector(name)
+            # Best-effort: try setting credentials if the Rust-side connector exposes a setter.
+            if api_key or api_secret:
+                try:
+                    if hasattr(conn, "set_api_credentials"):
+                        conn.set_api_credentials(api_key or "", api_secret or "")
+                    elif hasattr(conn, "set_api_key") and api_key:
+                        conn.set_api_key(api_key)
+                except Exception:
+                    logger.exception("Failed to set credentials on rust connector (ignored)")
+            return conn
         except Exception:
             logger.exception("rust get_connector failed; falling back to Python adapter")
-    # Fallback adapter with same methods
+
+    # Fallback adapter with same methods and optional credentials storage
     class _Fallback:
-        def __init__(self, n):
+        def __init__(self, n, api_key: Optional[str] = None, api_secret: Optional[str] = None):
             self.name = n
             self.symbols = ["BTC-USD", "ETH-USD"]
+            self.api_key = api_key
+            self.api_secret = api_secret
+
         def list_symbols(self):
             return self.symbols
+
         def fetch_orderbook_sync(self, symbol):
-            return {"bids":[[100.0,1.0]], "asks":[[100.2,1.0]]}
+            return {"bids": [[100.0, 1.0]], "asks": [[100.2, 1.0]]}
+
         def start_stream(self, symbol, cb):
             raise NotImplementedError("Fallback connector does not support streaming")
+
         def latest_snapshot(self):
             return None
-    return _Fallback(name)
+
+        def set_api_credentials(self, api_key: str, api_secret: str):
+            self.api_key = api_key
+            self.api_secret = api_secret
+
+    return _Fallback(name, api_key, api_secret)
 
 def compute_dex_cex_arbitrage(ob_cex: Any, ob_dex: Any, fee_cex: float = 0.001, fee_dex: float = 0.002):
     if RUST_AVAILABLE and hasattr(rust_connector, "compute_dex_cex_arbitrage"):

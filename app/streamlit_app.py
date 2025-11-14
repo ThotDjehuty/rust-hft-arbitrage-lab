@@ -19,9 +19,24 @@ st.title("Connectors & Live Market Data")
 with st.sidebar:
     st.header("Live configuration")
     connector_name = st.selectbox("Connector", list_connectors())
-    connector = get_connector(connector_name)
+
+    # Conditionally ask for API credentials for connectors that commonly require them
+    lower_name = connector_name.lower() if isinstance(connector_name, str) else ""
+    needs_auth = any(k in lower_name for k in ("binance", "coinbase"))
+    if needs_auth:
+        st.markdown("**Credentials**")
+        api_key = st.text_input("API Key", type="password", key=f"{connector_name}_api_key")
+        api_secret = st.text_input("API Secret", type="password", key=f"{connector_name}_api_secret")
+    else:
+        api_key = None
+        api_secret = None
+
+    # Obtain connector instance, passing credentials when available. The bridge will try to
+    # set credentials on returned connector objects when possible.
+    connector = get_connector(connector_name, api_key=api_key, api_secret=api_secret)
     symbols = connector.list_symbols() if hasattr(connector, "list_symbols") else []
     symbol = st.selectbox("Symbol", symbols)
+
     st.write("---")
     st.markdown("Automated collection")
     auto_collect = st.checkbox("Collect market snapshots continuously", value=False)
