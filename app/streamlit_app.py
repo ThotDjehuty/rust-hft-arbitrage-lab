@@ -4,6 +4,12 @@ import plotly.graph_objects as go
 import time
 import threading
 from datetime import datetime
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import python module
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from python.rust_bridge import list_connectors, get_connector, compute_dex_cex_arbitrage
 
 st.set_page_config(page_title="HFT Arbitrage Lab — Connectors (Live)", layout="wide")
