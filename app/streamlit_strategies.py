@@ -26,29 +26,18 @@ if page == "📊 Market Data":
     # Connector configuration
     with st.sidebar:
         st.header("Live configuration")
-        connector_name = st.selectbox("Connector", list_connectors())
         
-        # Conditionally ask for API credentials
-        lower_name = connector_name.lower() if isinstance(connector_name, str) else ""
-        needs_auth = any(k in lower_name for k in ("binance_auth", "coinbase_auth", "finnhub"))
+        # Default to finnhub
+        connectors = list_connectors()
+        default_idx = connectors.index("finnhub") if "finnhub" in connectors else 0
+        connector_name = st.selectbox("Connector", connectors, index=default_idx)
         
-        if needs_auth:
-            st.markdown("**Credentials**")
-            api_key = st.text_input("API Key", type="password", key=f"{connector_name}_api_key")
-            api_secret = st.text_input("API Secret", type="password", key=f"{connector_name}_api_secret")
-            
-            if "coinbase_auth" in lower_name:
-                passphrase = st.text_input("Passphrase", type="password", key=f"{connector_name}_passphrase")
-            else:
-                passphrase = None
-        else:
-            api_key = None
-            api_secret = None
-            passphrase = None
+        # Credentials are auto-loaded from api_keys.properties
+        st.info("📝 Credentials loaded from `api_keys.properties`. See QUICK_CONFIG.md for setup.")
         
-        # Get connector
+        # Get connector - credentials auto-loaded from api_keys.properties
         try:
-            connector = get_connector(connector_name, api_key=api_key, api_secret=api_secret, passphrase=passphrase)
+            connector = get_connector(connector_name)
             symbols = connector.list_symbols() if hasattr(connector, "list_symbols") else []
             symbol = st.selectbox("Symbol", symbols)
         except Exception as e:
@@ -153,9 +142,13 @@ elif page == "⚡ Strategy Execution":
         st.subheader("Backtest Configuration")
         initial_capital = st.number_input("Initial Capital ($)", value=100000.0, min_value=1000.0)
         
-        # Generate synthetic market data
-        generate_data = st.checkbox("Generate synthetic data", value=True)
-        if generate_data:
+        # Data source selection
+        data_source = st.radio("Data Source", ["Finnhub (Real)", "Synthetic"], index=0)
+        
+        if data_source == "Finnhub (Real)":
+            st.info("📝 Finnhub API key loaded from `api_keys.properties`")
+            num_periods = st.slider("Number of periods", 100, 2000, 500)
+        else:
             num_periods = st.slider("Number of periods", 100, 5000, 1000)
         
         run_backtest = st.button("🚀 Run Backtest", type="primary")
@@ -164,25 +157,44 @@ elif page == "⚡ Strategy Execution":
         st.subheader("Backtest Results")
         
         if run_backtest:
-            with st.spinner("Running backtest..."):
-                # Generate synthetic market data
-                timestamps = pd.date_range(start=datetime.now() - timedelta(days=num_periods//100), periods=num_periods, freq='5min')
-                
-                market_data = pd.DataFrame({"timestamp": timestamps})
-                
-                # Generate price data for each symbol
+            with st.spinner("Generating market data..."):
+                # Get symbols for strategy
                 if strategy_def.requires_multiple_symbols:
-                    symbols = [params.get("symbol_a", "BTC/USD"), params.get("symbol_b", "ETH/USD")]
+                    symbols_param = [params.get("symbol_a", "BINANCE:BTCUSDT"), 
+                                   params.get("symbol_b", "BINANCE:ETHUSDT")]
                     if "symbol_c" in params:
-                        symbols.append(params.get("symbol_c", "ETH/BTC"))
+                        symbols_param.append(params.get("symbol_c", "BINANCE:BNBUSDT"))
                 else:
-                    symbols = [params.get("symbol", "BTC/USD")]
+                    symbols_param = [params.get("symbol", "BINANCE:BTCUSDT")]
                 
-                for sym in symbols:
-                    # Generate random walk prices
-                    returns = np.random.randn(num_periods) * 0.02
-                    prices = 100 * (1 + returns).cumprod()
-                    market_data[f"{sym}_mid"] = prices
+                # Generate or fetch market data
+                if data_source == "Finnhub (Real)":
+                    try:
+                        from python.finnhub_helper import fetch_historical_simulation
+                        # API key is auto-loaded inside fetch_historical_simulation
+                        market_data = fetch_historical_simulation(symbols_param, periods=num_periods)
+                        st.success(f"✓ Fetched real data for {len(symbols_param)} symbols from Finnhub")
+                    except Exception as e:
+                        st.warning(f"Finnhub fetch failed ({e}), using synthetic data")
+                        # Fallback to synthetic
+                        timestamps = pd.date_range(start=datetime.now() - timedelta(days=num_periods//100), 
+                                                  periods=num_periods, freq='5min')
+                        market_data = pd.DataFrame({"timestamp": timestamps})
+                        rng = np.random.default_rng(42)
+                        for sym in symbols_param:
+                            returns = rng.normal(0, 0.02, num_periods)
+                            prices = 100 * (1 + returns).cumprod()
+                            market_data[f"{sym}_mid"] = prices
+                else:
+                    # Generate synthetic data
+                    timestamps = pd.date_range(start=datetime.now() - timedelta(days=num_periods//100), 
+                                              periods=num_periods, freq='5min')
+                    market_data = pd.DataFrame({"timestamp": timestamps})
+                    rng = np.random.default_rng(42)
+                    for sym in symbols_param:
+                        returns = rng.normal(0, 0.02, num_periods)
+                        prices = 100 * (1 + returns).cumprod()
+                        market_data[f"{sym}_mid"] = prices
                 
                 # Create and run strategy
                 config = StrategyConfig(
@@ -265,10 +277,7 @@ elif page == "📈 Live Trading":
         
         connector_name = st.selectbox("Connector", list_connectors(), key="live_connector")
         
-        # API credentials
-        st.markdown("**API Credentials**")
-        api_key = st.text_input("API Key", type="password", key="live_api_key")
-        api_secret = st.text_input("API Secret", type="password", key="live_api_secret")
+        st.info("📝 API credentials loaded from `api_keys.properties`")
         
         initial_capital = st.number_input("Virtual Capital ($)", value=10000.0, min_value=100.0)
         

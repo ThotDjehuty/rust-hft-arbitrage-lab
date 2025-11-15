@@ -1,0 +1,19 @@
+# Other API Keys (add as needed)
+# KRAKEN_API_KEY=1rv/4YXUsMn8bjLB8FZ0kr4y2cC7oWkfOofwzE/dKnM5WxbuRvySyDES
+# KRAKEN_API_SECRET=wwMH732imIGWK0S1HysN4xQ7j6bx
+
+# API Keys Configuration
+# Fill in your actual API keys before building/running
+
+# Finnhub API Key (get free key at https://finnhub.io/register)
+FINNHUB_API_KEY=
+
+# Binance API Credentials (for authenticated endpoints)
+BINANCE_API_KEY=
+BINANCE_API_SECRET=
+
+# Coinbase API Credentials (for authenticated endpoints)
+COINBASE_API_KEY=
+COINBASE_API_SECRET=
+COINBASE_PASSPHRASE=
+

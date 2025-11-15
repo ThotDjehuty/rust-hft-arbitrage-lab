@@ -1,8 +1,0 @@
-version: '3.9'
-services:
-  lab:
-    build:
-      context: .
-      dockerfile: Dockerfile.tick
-    environment:
-      - PYTHONPATH=/app

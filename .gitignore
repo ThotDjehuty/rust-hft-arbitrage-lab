@@ -49,6 +49,7 @@ source/
 # Environment variables and secrets
 .env
 .env.local
+api_keys.properties
 *.key
 *.pem
 *.crt

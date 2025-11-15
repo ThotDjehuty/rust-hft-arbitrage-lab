@@ -1,27 +1,41 @@
+# Unified docker-compose for HFT Arbitrage Lab
 services:
+  # Mock APIs for testing
   mock_apis:
-    build:
-      context: ./mock_apis
+    build: ./mock_apis
     container_name: mock_apis
-    ports: [ "8000:8000" ]
-    volumes: [ "./mock_apis/data:/data:ro" ]
-  lab:
-    build:
-      context: .
-      dockerfile: Dockerfile.no-tick
-    container_name: rust-hft-arbitrage-lab
-    ports: [ "8888:8888" ]
-    volumes: [ ".:/app" ]
-    environment: [ "PYTHONPATH=/app" ]
-    depends_on: [ mock_apis ]
-
-  streamlit:
-    build: .
     ports:
-      - "8501:8501"
+      - "8000:8000"
     volumes:
-      - ./:/app:cached
+      - ./mock_apis/data:/data:ro
+
+  # Main lab environment
+  lab:
+    build: .
+    container_name: hft-lab
+    ports:
+      - "8501:8501"  # Streamlit
+      - "8888:8888"  # Jupyter
+    volumes:
+      - .:/app
+      - ./api_keys.properties:/app/api_keys.properties:ro
     environment:
-      - PYTHONUNBUFFERED=1
-    # Use a restart policy if desired
-    restart: "no"
+      - PYTHONPATH=/app
+    depends_on:
+      - mock_apis
+    restart: unless-stopped
+
+  # Jupyter notebook server
+  jupyter:
+    build: .
+    container_name: hft-jupyter
+    ports:
+      - "8889:8888"
+    volumes:
+      - .:/app
+      - ./api_keys.properties:/app/api_keys.properties:ro
+    environment:
+      - PYTHONPATH=/app
+    command: ["bash", "scripts/start_jupyter.sh"]
+    depends_on:
+      - mock_apis

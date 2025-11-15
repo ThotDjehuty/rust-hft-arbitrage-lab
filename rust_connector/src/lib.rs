@@ -74,6 +74,8 @@ impl ExchangeConnector {
             Ok(vec!["BTCUSDT".to_string(), "ETHUSDT".to_string(), "BNBUSDT".to_string()])
         } else if lower.contains("coinbase") {
             Ok(vec!["BTC-USD".to_string(), "ETH-USD".to_string()])
+        } else if lower.contains("kraken") {
+            Ok(vec!["XBTUSDT".to_string(), "ETHUSDT".to_string(), "XXBTZUSD".to_string()])
         } else if lower.contains("uniswap") {
             Ok(vec!["UNI/ETH".to_string(), "USDC/ETH".to_string()])
         } else {
@@ -113,6 +115,19 @@ impl ExchangeConnector {
                 },
                 Err(e) => return Err(pyo3::exceptions::PyRuntimeError::new_err(format!("request: {:?}", e))),
             }
+        } else if lower.contains("kraken") {
+            let url = format!("https://api.kraken.com/0/public/Depth?pair={}&count=5", symbol);
+            match reqwest::blocking::get(&url) {
+                Ok(resp) => match resp.json::<Value>() {
+                    Ok(v) => {
+                        let bids = parse_kraken_rest(&v, "bids");
+                        let asks = parse_kraken_rest(&v, "asks");
+                        return Ok(OrderBook::new(bids, asks));
+                    }
+                    Err(e) => return Err(pyo3::exceptions::PyRuntimeError::new_err(format!("json parse: {:?}", e))),
+                },
+                Err(e) => return Err(pyo3::exceptions::PyRuntimeError::new_err(format!("request: {:?}", e))),
+            }
         } else {
             // synthetic fallback
             let mid = 100.0;
@@ -127,12 +142,15 @@ impl ExchangeConnector {
 
     /// Start streaming; callback is a Python callable that receives an OrderBook pyobject.
     /// Spawns a tokio task for async WebSocket handling.
-    fn start_stream(&mut self, py: Python<'_>, symbol: String, py_callback: PyObject) -> PyResult<()> {
+    fn start_stream(&mut self, _py: Python<'_>, symbol: String, py_callback: PyObject) -> PyResult<()> {
         let snapshot = self.snapshot.clone();
         let name = self.name.clone();
         let cb = py_callback.clone();
 
-        tokio::spawn(async move {
+        // Spawn in a new thread with its own tokio runtime
+        std::thread::spawn(move || {
+            let rt = tokio::runtime::Runtime::new().expect("Failed to create tokio runtime");
+            rt.block_on(async move {
             let lower = name.to_lowercase();
             if lower.contains("binance") {
                 let url = format!("wss://stream.binance.com:9443/ws/{}@depth5@100ms", symbol.to_lowercase());
@@ -192,6 +210,37 @@ impl ExchangeConnector {
                     }
                     Err(e) => warn!("coinbase connect error: {:?}", e),
                 }
+            } else if lower.contains("kraken") {
+                let url = "wss://ws.kraken.com";
+                match connect_async(url).await {
+                    Ok((ws_stream, _)) => {
+                        info!("Connected to Kraken WS");
+                        let (mut write, mut read) = ws_stream.split();
+                        let subscribe = serde_json::json!({
+                            "event": "subscribe",
+                            "pair": [symbol.clone()],
+                            "subscription": {"name": "book", "depth": 10}
+                        });
+                        let _ = write.send(Message::Text(subscribe.to_string())).await;
+                        while let Some(msg) = read.next().await {
+                            match msg {
+                                Ok(Message::Text(txt)) => {
+                                    if let Ok(ob) = parse_kraken_ws_text(&txt) {
+                                        if let Ok(mut s) = snapshot.lock() { *s = Some(ob.clone()); }
+                                        Python::with_gil(|py| {
+                                            let cb_ref = cb.bind(py);
+                                            if let Ok(py_ob) = Py::new(py, ob.clone()) {
+                                                let _ = cb_ref.call1((py_ob,));
+                                            }
+                                        });
+                                    }
+                                }
+                                _ => {}
+                            }
+                        }
+                    }
+                    Err(e) => warn!("kraken connect error: {:?}", e),
+                }
             } else {
                 // fallback: synthetic stream
                 loop {
@@ -212,7 +261,8 @@ impl ExchangeConnector {
                     tokio::time::sleep(std::time::Duration::from_millis(500)).await;
                 }
             }
-        });
+            }); // end of rt.block_on
+        }); // end of std::thread::spawn
 
         Ok(())
     }
@@ -242,6 +292,26 @@ fn parse_binance_rest(v: &Value, key: &str) -> Vec<(f64, f64)> {
 
 fn parse_coinbase_rest(v: &Value, key: &str) -> Vec<(f64, f64)> {
     v.get(key)
+        .and_then(|x| x.as_array())
+        .map(|arr| {
+            arr.iter()
+                .filter_map(|it| {
+                    let p = it.get(0)?.as_str()?.parse::<f64>().ok()?;
+                    let q = it.get(1)?.as_str()?.parse::<f64>().ok()?;
+                    Some((p, q))
+                })
+                .take(5)
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+fn parse_kraken_rest(v: &Value, key: &str) -> Vec<(f64, f64)> {
+    // Kraken response format: {"result": {"XBTUSDT": {"bids": [...], "asks": [...]}}}
+    v.get("result")
+        .and_then(|result| result.as_object())
+        .and_then(|obj| obj.values().next()) // Get first pair's data
+        .and_then(|pair_data| pair_data.get(key))
         .and_then(|x| x.as_array())
         .map(|arr| {
             arr.iter()
@@ -307,6 +377,54 @@ fn parse_coinbase_l2_text(txt: &str) -> Result<OrderBook, serde_json::Error> {
         }
     }
     Ok(OrderBook::new(vec![(100.0, 1.0)], vec![(100.2, 1.0)]))
+}
+
+fn parse_kraken_ws_text(txt: &str) -> Result<OrderBook, serde_json::Error> {
+    let v: Value = serde_json::from_str(txt)?;
+    
+    // Kraken WS messages are arrays: [channelID, data, channelName, pair]
+    if let Some(arr) = v.as_array() {
+        if arr.len() >= 2 {
+            // Check if it's a book update
+            if let Some(data) = arr.get(1).and_then(|d| d.as_object()) {
+                // Snapshot format: {"as": [[price, vol, timestamp]], "bs": [[price, vol, timestamp]]}
+                if data.contains_key("as") && data.contains_key("bs") {
+                    let bids = data.get("bs")
+                        .and_then(|x| x.as_array())
+                        .map(|arr| {
+                            arr.iter()
+                                .filter_map(|it| {
+                                    let p = it.get(0)?.as_str()?.parse::<f64>().ok()?;
+                                    let q = it.get(1)?.as_str()?.parse::<f64>().ok()?;
+                                    Some((p, q))
+                                })
+                                .take(5)
+                                .collect()
+                        })
+                        .unwrap_or_default();
+                    
+                    let asks = data.get("as")
+                        .and_then(|x| x.as_array())
+                        .map(|arr| {
+                            arr.iter()
+                                .filter_map(|it| {
+                                    let p = it.get(0)?.as_str()?.parse::<f64>().ok()?;
+                                    let q = it.get(1)?.as_str()?.parse::<f64>().ok()?;
+                                    Some((p, q))
+                                })
+                                .take(5)
+                                .collect()
+                        })
+                        .unwrap_or_default();
+                    
+                    return Ok(OrderBook::new(bids, asks));
+                }
+            }
+        }
+    }
+    
+    // Return empty orderbook if parsing fails (not a book update message)
+    Ok(OrderBook::new(vec![], vec![]))
 }
 
 /// Uniswap pair reserves reader using ethers subcrates.
@@ -391,7 +509,13 @@ fn compute_dex_cex_arbitrage(ob_cex: &OrderBook, ob_dex: &OrderBook, fee_cex: f6
 /// Factory functions
 #[pyfunction]
 fn list_connectors() -> Vec<String> {
-    vec!["binance".to_string(), "coinbase".to_string(), "uniswap".to_string(), "mock".to_string()]
+    vec![
+        "binance".to_string(), 
+        "coinbase".to_string(), 
+        "kraken".to_string(),
+        "uniswap".to_string(), 
+        "mock".to_string()
+    ]
 }
 
 #[pyfunction]

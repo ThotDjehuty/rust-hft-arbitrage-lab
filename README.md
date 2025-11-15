@@ -33,6 +33,11 @@ Table of contents
 
 ## 1. Features
 
+- **Real Market Data** via Finnhub (free tier: 60 API calls/min):
+  - ✅ Crypto (Binance, Coinbase), Stocks, Forex
+  - ✅ Real-time quotes and WebSocket streaming
+  - ✅ Automatic fallback to synthetic data
+  - 📖 See `FINNHUB_USAGE.md` for details
 - Rust connector exported as a Python extension using PyO3 (fast orderbook parsing, example triangular compute).
 - Python bridge (`python/rust_bridge.py`) that exposes the Rust functions to notebooks / Streamlit.
 - Backtesting core (`python/backtest/core.py`) with:
@@ -40,17 +45,46 @@ Table of contents
   - Mark-to-market equity curve recording
   - Metrics: returns, Sharpe (annualized), max drawdown
   - Plotly visualizations
-- Notebooks:
-  - `notebooks/Triangular.ipynb`
-  - `notebooks/MarketMaking.ipynb`
-  - `notebooks/PairTrading.ipynb`
+- **11 Jupyter Notebooks** with real Finnhub data integration:
+  - `triangular_arbitrage.ipynb` - Crypto cross-rate arbitrage
+  - `stat_arb_pairs.ipynb` - Statistical arbitrage pairs trading
+  - `market_making.ipynb` - Market making strategy
+  - `market_making_imbalance.ipynb` - Imbalance-based MM
+  - `hawkes_modeling.ipynb` - Hawkes process modeling
+  - `pair_trading_optimal.ipynb` - Optimal pairs trading
+  - `portfolio_hedging.ipynb` - Portfolio hedging strategies
+  - `price_discovery.ipynb` - Price discovery analysis
+  - `signature_optimal_stopping.ipynb` - Signature methods
+  - `triangular_signature_optimal_stopping.ipynb` - Combined approach
+  - `ws_orderbook_client_demo.ipynb` - WebSocket demo
   Each notebook contains equations, inline commentary, fallback implementations and visualization cells.
-- Streamlit app (`app/streamlit_app.py`) that:
-  - Runs backtests (synthetic or CSV)
-  - Simulates live feed (synthetic orderbook)
+- **Two Streamlit Apps**:
+  - `streamlit_app.py` - Market data explorer with live connectors
+  - `streamlit_strategies.py` - Strategy backtesting with real/synthetic data
   - Attempts to start the Rust WebSocket connector if built
   - Displays equity, trades, orderbook snapshots and metrics
 - Docker-based reproducible build (Rust + Python built inside container using maturin).
+
+---
+
+## 1.1 Real Market Data (Optional)
+
+Get real market data from Finnhub (free tier: 60 API calls/min):
+
+```bash
+# Get free API key at https://finnhub.io/register
+export FINNHUB_API_KEY=your_key_here
+
+# Run notebooks or apps - they'll use real data automatically
+streamlit run app/streamlit_strategies.py
+```
+
+**Features:**
+- ✅ Real-time crypto, stocks, forex data
+- ✅ Automatic fallback to synthetic data if no key
+- ✅ Simple environment variable configuration
+
+See `QUICK_CONFIG.md` for setup details.
 
 ---
 

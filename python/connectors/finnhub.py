@@ -10,6 +10,7 @@ import threading
 from typing import Optional, Callable
 import websocket
 import time
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +25,23 @@ class FinnhubConnector:
     Free tier limits: 60 API calls/minute
     """
     
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: Optional[str] = None):
+        # Auto-load API key from api_keys.properties if not provided
+        if api_key is None:
+            try:
+                from python.api_keys import get_api_key
+                api_key = get_api_key("FINNHUB_API_KEY")
+            except ImportError:
+                pass
+        
+        if not api_key:
+            raise ValueError(
+                "Finnhub API key not found. Please:\n"
+                "1. Copy api_keys.properties.example to api_keys.properties\n"
+                "2. Fill in FINNHUB_API_KEY\n"
+                "Or provide the key explicitly to the constructor."
+            )
+        
         self.api_key = api_key
         self.name = "finnhub"
         self.ws_url = f"wss://ws.finnhub.io?token={api_key}"
@@ -52,18 +69,55 @@ class FinnhubConnector:
     
     def fetch_orderbook_sync(self, symbol: str):
         """
-        Return synthetic orderbook from latest quote.
-        Finnhub doesn't provide full depth, so we create a 1-level book.
+        Fetch real-time quote via REST API and return synthetic orderbook.
+        Finnhub doesn't provide full depth, so we create a 1-level book from quote.
         """
+        # If WebSocket stream is running, return cached data
         with self._lock:
-            if self.latest_bid is None or self.latest_ask is None:
-                # No data yet, return empty book
-                return {"bids": [], "asks": []}
-            
-            return {
-                "bids": [[self.latest_bid, 1.0]],
-                "asks": [[self.latest_ask, 1.0]]
+            if self.latest_bid is not None and self.latest_ask is not None:
+                return {
+                    "bids": [[self.latest_bid, 1.0]],
+                    "asks": [[self.latest_ask, 1.0]]
+                }
+        
+        # Otherwise, fetch via REST API
+        try:
+            # Fetch real-time quote from Finnhub REST API
+            url = f"https://finnhub.io/api/v1/quote"
+            params = {
+                "symbol": symbol,
+                "token": self.api_key
             }
+            response = requests.get(url, params=params, timeout=5)
+            response.raise_for_status()
+            data = response.json()
+            
+            # Extract current price (c), high (h), low (l), open (o), previous close (pc)
+            current_price = data.get("c")
+            
+            if current_price and current_price > 0:
+                # Create synthetic bid/ask with small spread (1 bps)
+                spread = current_price * 0.0001
+                bid = current_price - spread / 2
+                ask = current_price + spread / 2
+                
+                # Update cached values
+                with self._lock:
+                    self.latest_bid = bid
+                    self.latest_ask = ask
+                    self.latest_symbol = symbol
+                
+                return {
+                    "bids": [[bid, 1.0]],
+                    "asks": [[ask, 1.0]]
+                }
+            else:
+                logger.warning(f"No valid price data for {symbol}")
+                return {"bids": [], "asks": []}
+                
+        except Exception as e:
+            logger.error(f"Failed to fetch quote for {symbol}: {e}")
+            return {"bids": [], "asks": []}
     
     def start_stream(self, symbol: str, callback: Callable):
         """
